@@ -1,0 +1,27 @@
+<p>managecuisines works!</p>
+<input type="search" [(ngModel)]="search" class="form-control" placeholder="Search..." aria-label="Search">
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Cuisine Name</th>
+            <th>Descrption</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let c of cuisinelist|filter:search;let i = index ">
+
+            <td>{{c.id}}</td>
+            <td>{{c.name}}</td>
+            <td>{{c.description}}</td>
+
+            <td><a [routerLink]="['/updatecuisine',c.id]" class="btn btn-warning">Update cuisine</a></td>
+            <td><button class="btn btn-danger" (click)=delete(c.id)>Delete cuisine</button></td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+<hr>
+<a [routerLink]="['/addcuisine']" class="btn btn-success">Add Cuisine</a>

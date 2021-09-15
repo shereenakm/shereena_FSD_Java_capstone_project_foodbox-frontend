@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-sm-6 offset-sm-3">
+        <h2 *ngIf="isAddmode">Add Product</h2>
+        <h2 *ngIf="!isAddmode">Update Product</h2>
+        <form [formGroup]="productFrom" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="code">Product code</label>
+                <input type="text" formControlName="code" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.code.errors }" />
+                <div *ngIf="submitted && f.code.errors" class="invalid-feedback">
+                    <div *ngIf="f.code.errors.required">product code is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="category">Product category</label>
+                <input type="text" formControlName="category" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.category.errors }" />
+                <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+                    <div *ngIf="f.category.errors.required">product category is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Product description</label>
+                <input type="text" formControlName="description" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+                <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                    <div *ngIf="f.description.errors.required">product description is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="price">Product price</label>
+                <input type="number" formControlName="price" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.price.errors }" />
+                <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                    <div *ngIf="f.price.errors.required">product price is required</div>
+                </div>
+            </div>
+                <div class="form-group">
+                    <label for="quantity">Product Quantity</label>
+                    <input type="number" formControlName="quantity" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.quantity.errors }" />
+                    <div *ngIf="submitted && f.quantity.errors" class="invalid-feedback">
+                        <div *ngIf="f.quantity.errors.required">product quantity is required</div>
+                    </div>
+            </div>
+            <br>
+            <div class="form-group">
+                    <label for="is_active"class="custom-control-label">Activate&nbsp;</label>
+                    <input type="radio" [value]=true formControlName="is_active" class="custom-control-input"
+                    [ngClass]="{ 'is-invalid': submitted && f.is_active.errors }" />
+                    &nbsp;&nbsp;&nbsp;
+                    
+                    <label for="is_active"class="custom-control-label">De-Activate&nbsp;</label>
+                    <input type="radio" [value]=false formControlName="is_active" class="custom-control-input"
+                    [ngClass]="{ 'is-invalid': submitted && f.is_active.errors }" />
+                    
+
+                    <div *ngIf="submitted && f.is_active.errors" class="invalid-feedback">
+                    <div *ngIf="f.is_active.errors.required">product avaliable is required</div>
+                    </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="image">Product image</label>
+            <input type="text" formControlName="image" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.image.errors }" />
+            <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+                <div *ngIf="f.image.errors.required">product image is required</div>
+            </div>
+    </div>
+    <div formGroupName = "cuisine">
+    <div class="form-group">
+        <label for="id">Product Cuisine</label>
+        <select formControlName="id" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.id.errors }" >
+            <option [ngValue]="null" disabled>Choose cuisine</option>
+            <option  *ngFor ="let c of cuisinelist"[ngValue]="c.id">{{c.name}}{{c.id}}</option></select>
+            <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
+            <div *ngIf="f.id.errors.required">product cuisine is required</div>
+        </div>
+</div>
+    </div>
+    <br>
+            <div class="form-group">
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Add Product
+                </button> &nbsp;&nbsp;&nbsp;<button
+                routerLink="/manageproduct" class="btn btn-warning">Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

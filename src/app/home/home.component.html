@@ -1,0 +1,79 @@
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+        </div>
+        <div class="col-6">
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/assets/coursol1.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="/assets/coursol2.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="/assets/coursol3.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+        </div>
+        
+    </div>
+    <br>
+    <br>
+    <div class="container-fluid">
+        <input type="search" [(ngModel)]="search" class="form-control" placeholder="Search..." aria-label="Search">
+        <br>
+    </div>
+    <ul class="nav flex-row">
+        <li>
+            <h3>Cuisines</h3>
+        </li>
+        <li class="nav-item" *ngFor="let c of cuisinelist">
+            <a class="nav-link" (click)=csearch(c)>{{c.name}}</a>
+        </li>
+    </ul>
+    <br>
+    <div class="row row-cols-md-3">
+        <div class="col" *ngFor="let pdt of productlist|filter:search ">
+            <div class="card" style="width: 18rem;">
+                <img src="/assets/product/{{pdt.image}}.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{pdt.category}}</h5>
+                    <p class="card-text">{{pdt.description}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{pdt.cuisine.description}}</li>
+                    <li class="list-group-item">Price :{{pdt.price}}₹</li>
+                    <li class="list-group-item">
+                        <div class="row">Qty:
+
+                            <div class="col"><button class="btn btn-warning" (click)=minus()><i
+                                        class="bi bi-cart-dash"></i></button></div>
+                            <div class="col"><input type="number" [value]="countVal" class="form-control"></div>
+                            <div class="col"><button class="btn btn-info" (click)=plus() ><i
+                                        class="bi bi-cart-plus"></i></button></div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="card-body">
+                    <button class="btn btn-success" (click)=addtocartline(pdt)>Add<i class="bi bi-cart4"></i> </button>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <br>
+</div>

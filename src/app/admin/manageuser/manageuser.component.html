@@ -1,0 +1,42 @@
+<div class="container">
+<input type="search" [(ngModel)] = "search" class="form-control" placeholder="Search..."
+                        aria-label="Search">
+
+<table class = "table table-hover"> <thead>
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Role</th>
+        <th>Email</th>
+        <th>Contact Number</th>
+        <th>change Role</th>
+        <th>
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor ="let p of userlist|filter:search;let i = index ">
+            <td>{{p.id}}</td>
+            <td>{{p.firstname}}</td>
+            <td>{{p.lastname}}</td>
+            <td>{{p.role}}</td>
+            <td>{{p.email}}</td>
+            <td>{{p.contact_number}}</td>
+            <td>
+                <mat-form-field appearance="fill">
+                    <mat-label>Select an option</mat-label>
+                    <mat-select [(value)]="selected">
+                      <mat-option>None</mat-option>
+                      <mat-option value="admin">Admin</mat-option>
+                      <mat-option value="user">User</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <td><button class = "btn btn-warning" (click)=changerole(p.id,p) >Change Role</button></td>   
+            <td><button class = "btn btn-danger" (click)=delete(p.id) >Delete User</button></td><div>
+            </div>
+        </tr>
+    </tbody>
+</table>
+</div>

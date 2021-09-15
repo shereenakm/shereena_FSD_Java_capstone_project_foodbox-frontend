@@ -1,0 +1,162 @@
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <h2>Checkout form</h2>
+        </div>
+
+        <div class="row g-5">
+            <div class="col-md-5 col-lg-4 order-md-last">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary">Your cart</span>
+                    <span class="badge bg-primary rounded-pill">{{count}}</span>
+                </h4>
+                <div *ngFor="let p of cartitems">
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                            <div>
+                                <h6 class="my-0">{{p.product.category}}</h6>
+                                <h6 class="my-0">{{p.product.cuisine.name}}</h6>
+                                <small class="text-muted">{{p.product.description}}</small>
+                            </div>
+                            <span class="text-muted">Price: {{p.product.price}} ₹ X {{p.product_count}} Nos {{p.total}}
+                                ₹</span>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total (INR)</span>
+                        <strong>{{grandTotal}}</strong>
+                    </li>
+                </ul>
+
+
+            </div>
+            <div class="col-md-7 col-lg-8">
+                <h4 class="mb-3">Billing address</h4>
+                <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+                    <div class="row g-3">
+
+                        <div formGroupName="user">
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="firstname">First Name</label>
+                                    <input type="text" formControlName="firstname" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
+                                    <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                                        <div *ngIf="f.firstname.errors.required">First Name is required</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="lastname">Last Name</label>
+                                    <input type="text" formControlName="lastname" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
+                                    <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                                        <div *ngIf="f.lastname.errors.required">Last Name is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="contact_number">Contact</label>
+                                    <input type="text" formControlName="contact_number" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.contact_number.errors }" />
+                                    <div *ngIf="submitted && f.contact_number.errors" class="invalid-feedback">
+                                        <div *ngIf="f.contact_number.errors.required">contact Number is required</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" formControlName="email" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                        <div *ngIf="f.email.errors.required"> Please enter a valid email address for
+                                            shipping updates.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address" placeholder="1234 Main St"
+                                required="true" formControlName="address_1">
+                            <div class="invalid-feedback">
+                                Please enter your shipping address.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="address2" class="form-label">Address 2 <span
+                                    class="text-muted">(Optional)</span></label>
+                            <input type="text" class="form-control" id="address2" placeholder="Apartment or suite"
+                                fromControlName="address_2">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="city" class="form-label">city <span class="text-muted">(Optional)</span></label>
+                            <input type="text" class="form-control" id="city" placeholder="Apartment or suite"
+                                fromControlName="">
+                        </div>
+
+                        <div class="col-md-5">
+                            <label for="country" class="form-label">Country</label>
+                            <select class="form-select" id="country" required="true" fromControlName="country">
+                                <option value="">Choose...</option>
+                                <option>United States</option>
+                                <option>India</option>
+                                <option>UAE</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid country.
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="state" class="form-label">State</label>
+                            <select class="form-select" id="state" required="true" fromControlName="state">
+                                <option value="">Choose...</option>
+                                <option>California</option>
+                                <option>Tamilnadu</option>
+                                <option>karnataka</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="zip" class="form-label">Zip</label>
+                            <input type="text" class="form-control" id="zip" placeholder=""
+                                fromControlName="postal_code" fromrequired="true">
+                            <div class="invalid-feedback">
+                                Zip code required.
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+            
+                    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+
+                        
+                    
+                </form>
+            </div>
+        </div>
+
+
+    </main>
+</div>
+
+
+
+
